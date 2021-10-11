@@ -17,7 +17,7 @@
         <td><?=$news['createdate']?></td>
         <td><?=$news['updatedate']?></td>
         <td><?=$news['author']?></td>
-        <td><form action="/news/edit" method="post">
+        <td><form action="/news/edit" method="get">
                 <input type="hidden" name="id" value="<?= $news['id']?>">
                 <input type="submit" value="edit" >
             </form>

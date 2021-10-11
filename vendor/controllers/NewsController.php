@@ -48,8 +48,10 @@ class NewsController extends AbstractController
      */
     public function edit()
     {
+        $id= $_REQUEST['id'];
+        $newsItem = $this->store->getNews($id);
         $view = new View('news_edit');
-        $view->render();
+        $view->render(['news'=>$newsItem]);
     }
 
     /**
