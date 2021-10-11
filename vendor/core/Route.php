@@ -1,6 +1,5 @@
 <?php
 namespace core;
-namespace core;
 class Route
 {
     static public function init(){
@@ -12,7 +11,7 @@ class Route
         $components = explode('/', $url);
 
         if(count($components)>2){
-            exit('no page');//TODO
+            self::error404();
         }
 
         if(!empty($components[0])){
@@ -23,22 +22,18 @@ class Route
         }
         $controllerClass = '\\controllers\\'.ucfirst($controllerName).'Controller';
         if(!class_exists($controllerClass)){
-            exit('no class');//TODO
+           self::error404();
         }
         $controller = new $controllerClass();
         if(!method_exists($controller, $actionName)){
-            exit('no method');//TODO
+            self::error404();
         }
         $controller->$actionName();
     }
     static public function redirect($url = '/'){
         header("Location: $url");
     }
-    static public function url($controller, $action){
-        return "/$controller/$action";
-    }
 
-    //=======================================================
     static public function error404(){
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
         include('vendor/views/error404.php');
